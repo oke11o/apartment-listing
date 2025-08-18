@@ -1,0 +1,256 @@
+/**
+ * Critical CSS - Above the fold styles
+ * This file contains only the essential styles needed for initial render
+ * to improve First Contentful Paint (FCP) performance
+ */
+
+// Critical layout styles with inline values to avoid import conflicts
+html {
+  font-family: "PT Root UI", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #111827;
+  font-family: "PT Root UI", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+}
+
+// Critical container styles
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 959px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+// Critical loading spinner (visible immediately)
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.loading-spinner__circle {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f4f6;
+  border-top: 3px solid #3eb57c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner--small {
+  gap: 8px;
+}
+
+.loading-spinner--small .loading-spinner__circle {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.loading-spinner__text {
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  font-family: "PT Root UI", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+}
+
+.loading-spinner--small .loading-spinner__text {
+  font-size: 12px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Critical filter panel layout (above the fold) - minimal styles to prevent layout shift
+.filter-panel {
+  min-height: 200px; // Prevent layout shift
+  margin-bottom: 32px;
+}
+
+@media (max-width: 959px) {
+  .filter-panel {
+    margin-bottom: 24px;
+  }
+}
+
+// Critical apartment list layout
+.apartment-list {
+  min-height: 400px; // Prevent layout shift
+}
+
+// Critical table header (visible immediately on desktop)
+.apartment-table-header {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .apartment-table-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 120px 140px;
+    gap: 20px;
+    padding: 16px 20px 16px 0;
+    background: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #6c757d;
+  }
+}
+
+// Critical apartment card styles - prevent border flickering
+.apartment-card {
+  background: #ffffff;
+  border-radius: 8px;
+  transition: background-color 0.2s ease; // Only animate background, not borders
+  cursor: pointer;
+  width: 100%;
+}
+
+// Mobile card styles (default)
+@media (max-width: 959px) {
+  .apartment-card {
+    border: 1px solid #dee2e6 !important; // Gray border for mobile
+    margin-bottom: 4px;
+    background: #ffffff !important;
+    border-radius: 8px !important;
+  }
+}
+
+// Desktop styles - no border, transparent background
+@media (min-width: 960px) {
+  .apartment-card {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin-bottom: 0;
+    transition: none !important; // Force no transitions on desktop
+  }
+
+  .apartment-card__desktop {
+    background: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 120px 140px;
+    gap: 20px;
+    min-height: 80px; // Prevent layout shift
+    align-items: start;
+    padding: 16px 20px 16px 0;
+    transition: background-color 0.2s ease; // Only animate background
+  }
+}
+
+// Critical image placeholder (prevents layout shift)
+.apartment-card__image-placeholder,
+.apartment-row__image-placeholder {
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 14px;
+  border-radius: 0; // No border radius
+  flex-shrink: 0; // Prevent shrinking
+}
+
+// Critical image styles - no border radius
+.apartment-card__image,
+.apartment-row__image {
+  border-radius: 0 !important; // No border radius
+}
+
+// Critical button styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: #10b981;
+  color: white;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #10b981;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+// Critical page title styles - fixed size on all resolutions
+.page-title {
+  font-family: "PT Root UI", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 48px !important;
+  line-height: 50px !important;
+  letter-spacing: 0px;
+  color: #1a1a1a;
+  margin: 40px 0 24px 0; // Desktop: 40px сверху, 24px снизу
+  text-align: left;
+}
+
+// Адаптивные верхние отступы для заголовка
+@media (max-width: 1199px) {
+  .page-title {
+    margin-top: 32px; // Планшет: 32px сверху
+  }
+}
+
+@media (max-width: 959px) {
+  .page-title {
+    margin-top: 24px; // Мобильный: 24px сверху
+  }
+}
+
+@media (max-width: 479px) {
+  .page-title {
+    margin-top: 20px; // Маленький мобильный: 20px сверху
+  }
+}
+
+// Hide non-critical content initially to prevent FOUC
+.non-critical {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.non-critical.loaded {
+  opacity: 1;
+}

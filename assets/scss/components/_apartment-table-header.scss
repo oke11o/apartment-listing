@@ -1,0 +1,162 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.table-header {
+  display: none; // Hidden by default, shown only on desktop
+}
+
+.table-header__cell {
+  font-family: $font-family-primary;
+  font-size: 14px;
+  font-weight: 500;
+  color: color(gray-500);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.table-header__cell--area,
+.table-header__cell--floor,
+.table-header__cell--price {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.table-header__cell--area:hover,
+.table-header__cell--floor:hover,
+.table-header__cell--price:hover {
+  color: color(primary-hover);
+}
+
+.table-header__sort-icon {
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+  color: color(gray-500);
+  opacity: 0.8;
+}
+
+.table-header__sort-icon--active {
+  color: color(primary-hover);
+  opacity: 1;
+}
+
+.table-header__sort-icon--desc {
+  transform: rotate(180deg);
+}
+
+/* New dual-arrow layout */
+.table-header__sort {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.table-header__arrow {
+  width: 8px;
+  height: 5px;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+  opacity: 0.7;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(60%) sepia(8%) saturate(872%)
+    hue-rotate(169deg) brightness(96%) contrast(89%);
+}
+
+.table-header__arrow-placeholder {
+  width: 8px;
+  height: 5px;
+  background: color(gray-500);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.table-header__arrow--down {
+  transform: rotate(180deg);
+}
+
+.table-header__cell:hover .table-header__arrow {
+  filter: brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(872%)
+    hue-rotate(169deg) brightness(96%) contrast(89%);
+  opacity: 1;
+}
+
+.table-header__cell:hover .table-header__arrow-placeholder {
+  background: color(gray-500);
+  opacity: 1;
+}
+
+.table-header__arrow--active {
+  filter: brightness(0) saturate(100%) invert(69%) sepia(58%) saturate(2618%)
+    hue-rotate(125deg) brightness(91%) contrast(85%) !important;
+  opacity: 1 !important;
+}
+
+.table-header__arrow--active.table-header__arrow-placeholder {
+  background: color(primary-hover) !important;
+  opacity: 1 !important;
+}
+
+/* Mobile styles (< 960px) */
+@include mobile-only {
+  .table-header {
+    display: flex;
+    gap: 20px;
+    padding: 12px 16px 12px 0;
+    background: color(white);
+    border-bottom: none;
+  }
+
+  .table-header__cell--photo {
+    display: none; // Hide photo column on mobile
+  }
+
+  .table-header__cell--description {
+    display: none;
+  }
+
+  .table-header__cell {
+    font-size: 14px;
+    justify-content: flex-start;
+  }
+
+  .table-header__cell--area,
+  .table-header__cell--floor,
+  .table-header__cell--price {
+    justify-content: center;
+    white-space: nowrap;
+  }
+}
+
+/* Desktop styles (≥ 960px) */
+@media (min-width: 960px) {
+  .table-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 120px 140px;
+    gap: 20px;
+    padding: 16px 20px 16px 0;
+    background: color(white);
+    border-bottom: 1px solid color(gray-100);
+  }
+
+  .table-header__cell {
+    font-family: $font-family-primary;
+    font-size: 14px;
+    font-weight: 500;
+    color: color(gray-500);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+/* Large Desktop styles (≥ 1440px) */
+@include desktop-large-up {
+  .table-header {
+    grid-template-columns: 100px 1fr 120px 140px 160px;
+    gap: 20px;
+    padding: 20px 24px 20px 0;
+  }
+
+  .table-header__cell {
+    font-size: 14px;
+  }
+}

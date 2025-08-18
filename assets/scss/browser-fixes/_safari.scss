@@ -1,0 +1,65 @@
+// Safari-specific fixes
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.safari {
+  // Fix for range input styling in Safari
+  .range-slider__input {
+    -webkit-appearance: none;
+    background: transparent;
+
+    &::-webkit-slider-track {
+      @include range-slider-track;
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-slider-thumb {
+      @include range-slider-thumb;
+      -webkit-appearance: none;
+      margin-top: -5.5px; // Center the thumb on the track
+    }
+  }
+
+  // Fix for 100vh issue on mobile Safari
+  .apartment-listing-page {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+
+  // Fix for transform3d acceleration
+  .apartment-card {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  // Fix for smooth scrolling in Safari
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // Fix for flexbox shrinking in Safari
+  .apartment-card__content {
+    flex-shrink: 0;
+  }
+
+  // Fix for backdrop-filter in Safari
+  .filter-panel__loading {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+  // Fix for sticky positioning in Safari
+  .apartment-table-header {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  // Fix for object-fit in Safari
+  .apartment-card__image,
+  .apartment-row__image {
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+  }
+}

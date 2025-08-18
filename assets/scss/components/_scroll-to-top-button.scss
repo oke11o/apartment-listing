@@ -1,0 +1,183 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 56px;
+  height: 56px;
+  background: color(primary-light);
+  color: color(white);
+  border: 1px solid color(gray-200);
+  border-radius: radius(full);
+  cursor: pointer;
+  box-shadow: shadow(sm);
+  transition: all 0.3s ease;
+  font-family: $font-family-primary;
+
+  // Скрыта до загрузки Vue
+  opacity: 0;
+
+  html.vue-loaded & {
+    opacity: 1;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: shadow(md);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: shadow(sm);
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover &__icon {
+    transform: translateY(-1px);
+  }
+}
+
+/* Transition animations */
+.scroll-to-top-enter-active,
+.scroll-to-top-leave-active {
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top-enter-from {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+}
+
+.scroll-to-top-leave-to {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+}
+
+/* Mobile styles (< 960px) */
+@include mobile-only {
+  .scroll-to-top-button {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+
+    &__icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+/* Desktop styles (≥ 1440px) */
+@include desktop-large-up {
+  .scroll-to-top-button {
+    bottom: 32px;
+    right: 32px;
+    width: 60px;
+    height: 60px;
+
+    &__icon {
+      width: 26px;
+      height: 26px;
+    }
+  }
+}
+
+/* Focus styles for accessibility */
+.scroll-to-top-button:focus {
+  outline: 2px solid color(white);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-to-top-button,
+  .scroll-to-top-button__icon {
+    transition: none;
+  }
+
+  .scroll-to-top-button:hover {
+    transform: none;
+  }
+
+  .scroll-to-top-button:active {
+    transform: none;
+  }
+
+  .scroll-to-top-button:hover .scroll-to-top-button__icon {
+    transform: none;
+  }
+
+  .scroll-to-top-enter-active,
+  .scroll-to-top-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .scroll-to-top-enter-from,
+  .scroll-to-top-leave-to {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .scroll-to-top-button {
+    border: 2px solid color(white);
+    background: color(black);
+    color: color(white);
+
+    &:hover {
+      background: color(gray-800);
+    }
+  }
+}
+
+/* Dark mode support (if implemented) */
+@media (prefers-color-scheme: dark) {
+  .scroll-to-top-button {
+    background: color(primary);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+
+    &:hover {
+      background: color(primary-hover);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+    }
+
+    &:active {
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+  }
+}
+
+/* Safe area insets for mobile devices with notches */
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .scroll-to-top-button {
+    bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+
+  @include mobile-only {
+    .scroll-to-top-button {
+      bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+  }
+
+  @include desktop-large-up {
+    .scroll-to-top-button {
+      bottom: calc(32px + env(safe-area-inset-bottom));
+    }
+  }
+}

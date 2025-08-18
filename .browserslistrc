@@ -1,0 +1,19 @@
+# Browsers that we support
+
+# Global usage > 1%
+> 1%
+
+# Last 2 versions of major browsers
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# Internet Explorer 11 (if needed for legacy support)
+# IE 11
+
+# Not dead browsers
+not dead
+
+# Exclude Opera Mini (limited CSS support)
+not op_mini all

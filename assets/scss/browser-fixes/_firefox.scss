@@ -1,0 +1,48 @@
+// Firefox-specific fixes
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.firefox {
+  // Fix for range input styling in Firefox
+  .range-slider__input {
+    -moz-appearance: none;
+    background: transparent;
+
+    &::-moz-range-track {
+      @include range-slider-track;
+      border: none;
+    }
+
+    &::-moz-range-thumb {
+      @include range-slider-thumb;
+      border: none;
+      box-shadow: none;
+    }
+
+    &::-moz-focus-outer {
+      border: 0;
+    }
+  }
+
+  // Fix for button focus outline in Firefox
+  button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  // Gap works in supported Firefox versions; remove legacy fallback
+  .apartment-grid {
+    gap: spacing(lg);
+  }
+
+  .filter-panel__content {
+    gap: spacing(lg);
+  }
+
+  // Fix for backdrop-filter support
+  .filter-panel__loading {
+    @supports not (backdrop-filter: blur(4px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+  }
+}

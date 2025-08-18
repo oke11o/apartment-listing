@@ -1,0 +1,384 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.filter-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(174, 228, 178, 0.3) 0%,
+    rgba(149, 208, 161, 0.3) 100%
+  );
+  border-radius: radius(lg);
+  padding: spacing(xl);
+  position: relative;
+  transition: all 0.4s ease;
+
+  opacity: 0;
+
+  html.vue-loaded & {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: spacing(xl);
+  }
+
+  &__reset {
+    margin: 0 auto;
+    background: none;
+    border: none;
+    color: color(gray-500);
+    padding: 0;
+    font-family: $font-family-primary;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: flex-end;
+    gap: spacing(sm);
+    opacity: 0;
+
+    html.vue-loaded & {
+      opacity: 1;
+      transition: opacity 0.3s ease 0.2s;
+    }
+
+    &:hover {
+      color: color(gray-700);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &-icon {
+      flex-shrink: 0;
+    }
+  }
+
+  &__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    @include center-flex;
+    border-radius: radius(lg);
+    backdrop-filter: blur(2px);
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(md);
+  opacity: 0;
+
+  html.vue-loaded & {
+    opacity: 1;
+    transition: opacity 0.3s ease 0.1s;
+  }
+
+  &__label {
+    font-family: $font-family-primary;
+    font-size: 14px;
+    font-weight: 400;
+    color: color(gray-600);
+    display: flex;
+    align-items: center;
+    gap: spacing(sm);
+  }
+
+  &__range {
+    display: flex;
+    flex-direction: column;
+    gap: spacing(md);
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: spacing(md);
+    opacity: 0;
+
+    html.vue-loaded & {
+      opacity: 1;
+      transition: opacity 0.3s ease 0.15s;
+    }
+  }
+}
+
+.range-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: spacing(sm);
+  opacity: 0;
+
+  html.vue-loaded & {
+    opacity: 1;
+    transition: opacity 0.3s ease 0.2s;
+  }
+}
+
+.range-value {
+  font-family: $font-family-primary;
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &__label {
+    color: color(gray-500);
+  }
+
+  &__number {
+    color: color(gray-900);
+  }
+}
+
+.range-slider {
+  @include range-slider-track;
+  // margin: spacing(md) 0;
+  overflow: visible;
+  opacity: 0;
+
+  html.vue-loaded & {
+    opacity: 1;
+    transition: opacity 0.3s ease 0.1s;
+  }
+
+  &:focus-within {
+    outline: none;
+  }
+
+  &__input {
+    position: absolute;
+    top: -3px;
+    left: -7px; // Compensate for thumb width
+    width: calc(100% + 14px); // Add thumb width to both sides
+    height: 14px;
+    background: none;
+    pointer-events: none;
+    appearance: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+
+    &--min {
+      z-index: 2;
+    }
+
+    &--max {
+      z-index: 1;
+    }
+
+    &::-webkit-slider-thumb {
+      @include range-slider-thumb;
+      pointer-events: all;
+      position: relative;
+      margin-left: 0;
+    }
+
+    &::-moz-range-thumb {
+      @include range-slider-thumb;
+      pointer-events: all;
+      margin-left: 0;
+    }
+
+    &:disabled::-webkit-slider-thumb,
+    &:disabled::-moz-range-thumb {
+      background: color(gray-400);
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__highlight {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: color(primary-accent);
+    border-radius: 3px;
+    pointer-events: none;
+    z-index: 1;
+    min-width: 2px;
+  }
+}
+
+.room-button {
+  width: 40px;
+  height: 40px;
+  border-radius: radius(full);
+  border: none;
+  background: color(gray-50);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  @include center-flex;
+  box-shadow: shadow(sm);
+  font-family: $font-family-primary;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: inherit;
+  color: color(gray-700);
+
+  &:hover {
+    box-shadow: shadow(md);
+  }
+
+  &--active {
+    background: color(primary);
+    border: none;
+    box-shadow: shadow(sm);
+    color: white;
+  }
+
+  &--disabled {
+    background: color(gray-100);
+    color: color(gray-400);
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    &:hover {
+      box-shadow: shadow(sm);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      box-shadow: shadow(sm);
+    }
+  }
+}
+
+// Responsive styles
+@include mobile-only {
+  .filter-panel {
+    padding: spacing(lg);
+    margin: 0;
+    border-radius: radius(lg);
+
+    &__content {
+      gap: spacing(lg);
+    }
+
+    &__reset {
+      padding: spacing(sm) spacing(lg);
+      font-size: 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+  }
+
+  .filter-group {
+    gap: spacing(md);
+
+    &__label {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    &__buttons {
+      gap: spacing(md);
+    }
+  }
+
+  .range-inputs {
+    gap: spacing(sm);
+  }
+
+  .range-value {
+    font-size: 14px;
+
+    &__label,
+    &__number {
+      font-size: 14px;
+    }
+  }
+
+  .range-slider {
+    margin: spacing(md) 0 spacing(sm) 0;
+
+    &__input::-webkit-slider-thumb,
+    &__input::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .room-button {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@include desktop-large-up {
+  .filter-panel {
+    padding: 28px;
+    border-radius: radius(lg);
+
+    &__content {
+      gap: 28px;
+    }
+
+    &__reset {
+      padding: spacing(sm) spacing(lg);
+      font-size: 16px;
+    }
+  }
+
+  .filter-group {
+    gap: spacing(lg);
+
+    &__label {
+      font-size: 16px;
+    }
+
+    &__buttons {
+      gap: spacing(lg);
+    }
+  }
+
+  .range-value {
+    font-size: 16px;
+
+    &__label,
+    &__number {
+      font-size: 16px;
+    }
+  }
+
+  .range-slider {
+    margin: spacing(lg) 0;
+
+    &__input {
+      &::-webkit-slider-thumb,
+      &::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  .room-button {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+}

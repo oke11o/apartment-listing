@@ -1,0 +1,37 @@
+{
+  "name": "apartment-listing",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "build:analyze": "ANALYZE=true nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "analyze": "nuxt analyze",
+    "typecheck": "nuxt typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "perf:audit": "lighthouse http://localhost:3000 --output=html --output-path=./performance-audit.html",
+    "perf:build-size": "npm run build && du -sh .output/public/_nuxt/*",
+    "test:data": "node tests/api-test.js"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.1.7"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.9.0",
+    "@nuxt/image": "^1.7.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.34.0",
+    "intersection-observer": "^0.12.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "sass": "^1.69.5",
+    "smoothscroll-polyfill": "^0.4.4",
+    "typescript": "^5.2.2",
+    "vue-tsc": "^1.8.27"
+  }
+}

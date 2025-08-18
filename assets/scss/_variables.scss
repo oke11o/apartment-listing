@@ -1,0 +1,58 @@
+// Colors
+$colors: (
+  // Primary colors (green theme from Figma)
+  primary: #10b981,
+  primary-hover: #10b981,
+  primary-light: #95d0a1,
+  primary-accent: #3eb57c,
+  // Gray scale (matching Figma design)
+  gray-50: #f9fafb,
+  gray-100: #f3f4f6,
+  gray-200: #e5e7eb,
+  gray-300: #d1d5db,
+  gray-400: #9ca3af,
+  gray-500: #6b7280,
+  gray-600: #4b5563,
+  gray-700: #374151,
+  gray-800: #1f2937,
+  gray-900: #111827,
+  // Success colors (same as primary for consistency)
+  success: #10b981,
+  // Basic colors
+  white: #ffffff
+);
+
+// Spacing
+$spacing: (
+  xs: 4px,
+  sm: 8px,
+  md: 16px,
+  lg: 24px,
+  xl: 32px,
+);
+
+// Border radius
+$radius: (
+  sm: 4px,
+  md: 8px,
+  lg: 10px,
+  full: 50%,
+);
+
+// Shadows
+$shadows: (
+  sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+);
+
+// Typography
+$font-family-primary: "PT Root UI", -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Roboto, sans-serif;
+
+// Breakpoints
+$breakpoints: (
+  mobile: 959px,
+  desktop-large: 1440px,
+);

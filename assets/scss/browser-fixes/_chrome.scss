@@ -1,0 +1,70 @@
+// Chrome-specific fixes
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.chrome {
+  // Fix for range input styling in Chrome
+  .range-slider__input {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+
+    &::-webkit-slider-track {
+      @include range-slider-track;
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-slider-thumb {
+      @include range-slider-thumb;
+      -webkit-appearance: none;
+      margin-top: -5.5px;
+    }
+  }
+
+  // Fix for autofill styling in Chrome
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px color(white) inset;
+    -webkit-text-fill-color: color(gray-900);
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  // Fix for button focus outline in Chrome
+  button:focus-visible {
+    outline: 2px solid color(primary);
+    outline-offset: 2px;
+  }
+
+  // Smooth scroll задаётся глобально в assets/scss/main.scss
+
+  // Optimize animations for Chrome
+  .apartment-card {
+    will-change: transform;
+
+    &:hover {
+      will-change: auto;
+    }
+  }
+
+  // Fix for backdrop-filter performance in Chrome
+  .filter-panel__loading {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    will-change: backdrop-filter;
+  }
+
+  // Fix for CSS containment in Chrome
+  .apartment-card {
+    contain: layout style paint;
+  }
+
+  // Fix for scroll snap in Chrome
+  .apartment-grid {
+    scroll-snap-type: y proximity;
+
+    .apartment-card {
+      scroll-snap-align: start;
+    }
+  }
+}

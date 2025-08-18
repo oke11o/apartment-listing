@@ -1,0 +1,108 @@
+// Use modern @use syntax instead of deprecated @import
+@use "variables" as *;
+@use "mixins" as *;
+@use "animations";
+
+// Browser-specific fixes
+@use "browser-fixes/chrome";
+@use "browser-fixes/firefox";
+@use "browser-fixes/safari";
+
+// Use components
+@use "components/filter-panel";
+@use "components/apartment-card";
+@use "components/apartment-table-header";
+@use "components/scroll-to-top-button";
+
+// Global styles
+* {
+  box-sizing: border-box;
+}
+
+// Предотвращение мерцания до загрузки Vue
+.apartment-listing-page {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &:not([v-cloak]) {
+    opacity: 1;
+  }
+}
+
+html {
+  font-family: $font-family-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+// Убираем сложные анимации до загрузки
+* {
+  animation-play-state: paused;
+}
+
+html.vue-loaded * {
+  animation-play-state: running;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: color(white);
+  color: color(gray-900);
+  line-height: 1.6;
+}
+
+// Hide elements until Vue is loaded
+[v-cloak] {
+  display: none !important;
+}
+
+// Глобальная защита от мерцания
+html {
+  visibility: hidden;
+  opacity: 0;
+}
+
+html.vue-loaded {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  * {
+    border-color: color(gray-900) !important;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Utility classes
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 spacing(md);
+}
+
+.sr-only {
+  @include visually-hidden;
+}
+
+.truncate {
+  @include truncate;
+}
+
+.center {
+  @include center-flex;
+}

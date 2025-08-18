@@ -1,0 +1,116 @@
+// Import map module for modern Sass
+@use "sass:map";
+@use "variables" as *;
+
+// Helper function to get values from maps
+@function get($map, $key) {
+  @return map.get($map, $key);
+}
+
+// Color function
+@function color($name) {
+  @return get($colors, $name);
+}
+
+// Spacing function
+@function spacing($name) {
+  @return get($spacing, $name);
+}
+
+// Radius function
+@function radius($name) {
+  @return get($radius, $name);
+}
+
+// Shadow function
+@function shadow($name) {
+  @return get($shadows, $name);
+}
+
+// Breakpoint mixins
+@mixin mobile-only {
+  @media (max-width: get($breakpoints, mobile)) {
+    @content;
+  }
+}
+
+@mixin desktop-large-up {
+  @media (min-width: get($breakpoints, desktop-large)) {
+    @content;
+  }
+}
+
+// Button mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: radius(md);
+  font-family: $font-family-primary;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: color(primary);
+  color: color(white);
+
+  &:hover:not(:disabled) {
+    background: color(primary);
+  }
+}
+
+// Range slider mixins
+@mixin range-slider-track {
+  height: 3px;
+  background: color(gray-200);
+  border-radius: 3px;
+  position: relative;
+}
+
+@mixin range-slider-thumb {
+  width: 14px;
+  height: 14px;
+  background: color(success);
+  border-radius: radius(full);
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Utility mixins
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
