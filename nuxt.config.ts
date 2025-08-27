@@ -3,17 +3,17 @@ export default defineNuxtConfig({
   // Nuxt 3 configuration
 
   // Modules
-  modules: ["@pinia/nuxt", "@nuxt/image"],
+  modules: ['@pinia/nuxt', '@nuxt/image'],
   devtools: { enabled: true },
 
   // App configuration
   app: {
     head: {
-      title: "Список квартир",
+      title: 'Список квартир',
       meta: [
-        { name: "description", content: "Поиск и фильтрация квартир" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { charset: "utf-8" },
+        { name: 'description', content: 'Поиск и фильтрация квартир' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { charset: 'utf-8' },
       ],
       script: [
         {
@@ -22,7 +22,7 @@ export default defineNuxtConfig({
             document.documentElement.style.visibility = 'hidden';
             document.documentElement.style.opacity = '0';
           `,
-          type: "text/javascript",
+          type: 'text/javascript',
         },
       ],
     },
@@ -30,9 +30,9 @@ export default defineNuxtConfig({
 
   // CSS - Critical CSS first for better performance
   css: [
-    "~/assets/css/fonts.css",
-    "~/assets/scss/critical.scss", // Critical above-the-fold styles
-    "~/assets/scss/main.scss",
+    '~/assets/css/fonts.css',
+    '~/assets/scss/critical.scss', // Critical above-the-fold styles
+    '~/assets/scss/main.scss',
   ],
 
   // Runtime config
@@ -42,22 +42,22 @@ export default defineNuxtConfig({
 
     // Public keys (exposed to client-side)
     public: {
-      apiBase: "/api",
+      apiBase: '/api',
     },
   },
 
   // Build configuration for browser compatibility and optimization
   build: {
     transpile: [
-      "intersection-observer",
-      "resize-observer-polyfill",
-      "smoothscroll-polyfill",
+      'intersection-observer',
+      'resize-observer-polyfill',
+      'smoothscroll-polyfill',
     ],
   },
 
   // Nitro configuration for Vercel deployment
   nitro: {
-    preset: "vercel",
+    preset: 'vercel',
     vercel: {
       functions: {
         maxDuration: 30,
@@ -89,11 +89,11 @@ export default defineNuxtConfig({
         output: {
           // Manual chunk splitting for better caching
           manualChunks: {
-            "vue-vendor": ["vue", "@vue/runtime-core"],
-            "pinia-vendor": ["pinia"],
-            utils: [
-              "~/composables/useApiCache",
-              "~/composables/useImageOptimization",
+            'vue-vendor': ['vue', '@vue/runtime-core'],
+            'pinia-vendor': ['pinia'],
+            'utils': [
+              '~/composables/useApiCache',
+              '~/composables/useImageOptimization',
             ],
           },
         },
@@ -101,9 +101,9 @@ export default defineNuxtConfig({
     },
     optimizeDeps: {
       include: [
-        "intersection-observer",
-        "resize-observer-polyfill",
-        "smoothscroll-polyfill",
+        'intersection-observer',
+        'resize-observer-polyfill',
+        'smoothscroll-polyfill',
       ],
     },
   },
@@ -126,9 +126,9 @@ export default defineNuxtConfig({
 
   // Image optimization
   image: {
-    dir: "public",
+    dir: 'public',
     quality: 80,
-    format: ["webp", "png", "jpg"],
+    format: ['webp', 'png', 'jpg'],
     screens: {
       xs: 320,
       sm: 640,
@@ -138,4 +138,4 @@ export default defineNuxtConfig({
       xxl: 1536,
     },
   },
-});
+})
