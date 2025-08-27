@@ -278,7 +278,7 @@ watch(
   (newMetadata) => {
     if (newMetadata && !metadata.value) {
       initializeFilters(newMetadata)
-      
+
       // After metadata is initialized, check for URL filters and apply them
       nextTick(() => {
         if (import.meta.client) {
@@ -306,15 +306,15 @@ watch(
   (newFilters) => {
     if (metadata.value && import.meta.client) {
       const defaultFilters = {
-        priceRange: [...metadata.value.priceRange],
-        areaRange: [...metadata.value.areaRange],
+        priceRange: [...metadata.value.priceRange] as [number, number],
+        areaRange: [...metadata.value.areaRange] as [number, number],
         rooms: [],
-        floors: [...metadata.value.floorsRange],
+        floors: [...metadata.value.floorsRange] as [number, number],
       }
       updateUrlWithFilters(newFilters, defaultFilters)
     }
   },
-  { deep: true }
+  { deep: true },
 )
 
 // Initialize data on mount
